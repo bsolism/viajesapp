@@ -1,24 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import Routing from "./Routes/routing";
+import RoutingAuth from "./Routes/routingAuth";
+import { ToastContainer } from "react-toastify";
+import AuthContext from "./Utils/AuthContext";
+import AuthScreem from "./Pages/AuthScreen";
 
 function App() {
+  const [user, setUser] = useState();
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <AuthContext.Provider value={{ user, setUser }}>
+        <Routing />
+        {/* {user ? <Routing /> : <AuthScreem />} */}
+
+        <ToastContainer
+          position="top-right"
+          autoClose={5000}
+          hideProgressBar
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnVisibilityChange
+          draggable
+          pauseOnHover
+        />
+      </AuthContext.Provider>
+    </>
   );
 }
 
