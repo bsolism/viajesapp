@@ -12,4 +12,5 @@ export const endPoint = {
   getjourneys: "/api/GetJourneys",
   getjourneybycarrier: "/api/getjourneybycarrier/",
   getjourneybycarrierid: "/api/GetJourneyByCarrierId/",
+  login: "/api/login",
 };

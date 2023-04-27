@@ -37,24 +37,13 @@ export default function DetailAgency() {
     <>
       <MainLayout>
         <Box sx={{ display: "flex", width: "100%" }}>
-          <Typography variant="h6" noWrap component="div">
-            Nombre Agencia:
-          </Typography>
           <Typography
             variant="h6"
             noWrap
             component="div"
             style={{ marginLeft: 4, color: "#A9A9A9" }}
           >
-            {data ? data[0].name : " "}
-          </Typography>
-          <Typography
-            variant="h6"
-            noWrap
-            component="div"
-            style={{ marginLeft: 14 }}
-          >
-            Direccion:
+            {data ? data[0].name + ",  " : " "}
           </Typography>
           <Typography
             variant="h6"
@@ -77,7 +66,7 @@ export default function DetailAgency() {
           />
         </Grid>
       </MainLayout>
-      <AppModal open={open} handleClose={handleClose} title="Add Agency">
+      <AppModal open={open} handleClose={handleClose} title="Enroll Employe">
         <EnrollEmployee
           agencyId={data ? data[0].id : ""}
           dataRows={dataRow}

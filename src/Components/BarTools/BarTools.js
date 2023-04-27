@@ -7,7 +7,7 @@ export default function BarTools({ pag, handleOpen }) {
   return (
     <Box sx={{ display: "flex" }}>
       <BtnAdd title={pag} handleOpen={handleOpen} />
-      <FieldSearch />
+      {/* <FieldSearch /> */}
     </Box>
   );
 }

@@ -26,7 +26,7 @@ function Copyright(props) {
   );
 }
 
-export default function AuthScreen({ children }) {
+export default function AuthScreen() {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);

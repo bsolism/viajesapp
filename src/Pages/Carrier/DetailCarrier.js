@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { useLocation } from "react-router-dom";
 import Box from "@mui/material/Box";
 import { Typography } from "@mui/material";
@@ -15,21 +15,18 @@ export default function DetailCarrier() {
   const [dataRow, setDataRow] = useState([]);
   const [total, setTotal] = useState(0);
   const [dataFilter, setDataFilter] = useState([]);
-
   useEffect(() => {
     setData(location.state);
-    console.log(location.state);
     GetJourneyByCarrier(location.state[0].id);
-  }, [location]);
+  }, [location.state]);
 
   const GetJourneyByCarrier = async (id) => {
     const journeys = await apiJourney.GetJourneysByCarrierId(id).then((res) => {
       return res;
     });
     if (journeys.status === 200) {
-      JourneyMapper(journeys.data);
+      return JourneyMapper(journeys.data);
     }
-    console.log(journeys);
   };
 
   const JourneyMapper = (values) => {
@@ -69,12 +66,8 @@ export default function DetailCarrier() {
         data={dataFilter}
         sumarColumna={sumarColumna}
       />
-      <Grid item xs={8} height="70vh">
-        <DataGrid
-          rows={dataRow.length > 0 ? dataRow : []}
-          columns={columns}
-          hideFooter
-        />
+      <Grid item xs={8} height="60vh">
+        <DataGrid rows={dataRow.length > 0 ? dataRow : []} columns={columns} />
       </Grid>
       <Box
         sx={{
@@ -92,7 +85,10 @@ export default function DetailCarrier() {
           component="div"
           style={{ marginLeft: 20 }}
         >
-          {total}
+          {total.toLocaleString("es-HN", {
+            style: "currency",
+            currency: "HNL",
+          })}
         </Typography>
       </Box>
     </MainLayout>

@@ -1,24 +1,32 @@
-import React from "react";
+import React, { useContext } from "react";
 import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
-import TextField from "@mui/material/TextField";
-import Link from "@mui/material/Link";
-import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
-import UseAuth from "../../../Auth/UseAuth";
+import AuthContext from "./../../../Auth/Context";
+import apiLogin from "../../../Services/apiLogin";
+import AppFormik from "../Formik/AppFormik";
+import { toast } from "react-toastify";
+import FieldText from "../Fields/FieldText";
+import FieldSubmit from "../Fields/FieldSubmit";
+import * as Yup from "yup";
+
+const validation = Yup.object().shape({
+  userName: Yup.string().required("User Required").min(1).label("UserName"),
+  password: Yup.string().required("Password Required").min(1).label("Password"),
+});
 
 export default function Login() {
-  const auth = UseAuth();
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
+  const { user, setUser } = useContext(AuthContext);
+
+  const handleSubmit = async (values) => {
+    await apiLogin.CreateLogin(values).then((res) => {
+      if (res.status == 200) {
+        setUser(res.data);
+      } else {
+        toast.warning("Usuario no valido");
+      }
     });
-    auth.logIn(data);
   };
 
   return (
@@ -27,44 +35,31 @@ export default function Login() {
         <LockOutlinedIcon />
       </Avatar>
       <Typography component="h1" variant="h5">
-        Sign in
+        Login
       </Typography>
-      <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
-        <TextField
-          margin="normal"
-          required
-          fullWidth
-          id="email"
-          label="Email Address"
-          name="email"
-          autoComplete="email"
-          autoFocus
-        />
-        <TextField
-          margin="normal"
-          required
-          fullWidth
-          name="password"
-          label="Password"
-          type="password"
-          id="password"
-          autoComplete="current-password"
-        />
-        <Button
-          type="submit"
-          fullWidth
-          variant="contained"
-          sx={{ mt: 3, mb: 2 }}
+      <Box
+        sx={{
+          mt: 1,
+          width: 400,
+        }}
+      >
+        <AppFormik
+          initialValues={{ userName: "", password: "" }}
+          onSubmit={handleSubmit}
+          validationSchema={validation}
+          width={400}
         >
-          Sign In
-        </Button>
-        <Grid container>
-          <Grid item>
-            <Link href="#" variant="body2">
-              {"Don't have an account? Sign Up"}
-            </Link>
-          </Grid>
-        </Grid>
+          <Box component="form" sx={{ mt: 1 }}>
+            <FieldText name="userName" label="UserName" required />
+            <FieldText
+              name="password"
+              label="Password"
+              required
+              type="password"
+            />
+            <FieldSubmit title="Login" />
+          </Box>
+        </AppFormik>
       </Box>
     </>
   );

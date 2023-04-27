@@ -1,17 +1,14 @@
-import React, { useState } from "react";
+import React from "react";
 import Box from "@mui/material/Box";
 import { Typography } from "@mui/material";
 import FieldDatePicker from "../Forms/Fields/FieldDatePicker";
 import AppFormik from "../Forms/Formik";
-import AppButton from "../Button/AppButton";
 import FieldSubmit from "../Forms/Fields/FieldSubmit";
 import { toast } from "react-toastify";
 import dayjs from "dayjs";
 
 export default function FilterTool({ setData, data, sumarColumna }) {
   const handleSubmit = (values) => {
-    console.log(values);
-    console.log(data);
     if (validateDate(values)) {
       var newData = data.filter(
         (x) =>
@@ -20,7 +17,6 @@ export default function FilterTool({ setData, data, sumarColumna }) {
       );
       setData(newData);
       sumarColumna(newData);
-      console.log(newData);
     }
   };
 

@@ -3,7 +3,6 @@ import { Grid } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import MainLayout from "../../Layout";
 import BarTools from "../../Components/BarTools";
-import { useNavigate } from "react-router-dom";
 import AppModal from "../../Components/AppModal";
 import AddJourney from "../../Components/Forms/FormAddJourney";
 import apiJourney from "../../Services/apiJourney";
@@ -23,7 +22,6 @@ export default function Journey() {
   const getJourneys = async () => {
     await apiJourney.GetJourneys().then((res) => {
       if (res.status === 200) {
-        console.log(res.data);
         setData(res.data);
       }
     });

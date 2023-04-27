@@ -12,6 +12,10 @@ const style = {
   border: "2px solid #000",
   boxShadow: 24,
   p: 4,
+  margin: 2,
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
 };
 
 export default function AppModal({ open, handleClose, children, title }) {

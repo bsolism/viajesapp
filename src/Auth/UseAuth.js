@@ -11,7 +11,7 @@ const UseAuth = () => {
     //const user = jwtDecode(authToken);
     //setUser(user);
     setUser(authToken);
-    authStorage.SaveSessionData(authToken);
+    // authStorage.SaveSessionData(authToken);
   };
 
   const logOut = () => {

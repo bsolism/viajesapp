@@ -10,25 +10,24 @@ export default function AppFormik({
   validationSchema,
   children,
   innerRef,
-  width = 800,
 }) {
   return (
     <LocalizationProvider dateAdapter={AdapterDateFns}>
       <Box
         sx={{
-          width: width,
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
         }}
       >
-        <Grid container spacing={1}>
-          <Formik
-            innerRef={innerRef}
-            initialValues={initialValues}
-            onSubmit={onSubmit}
-            validationSchema={validationSchema}
-          >
-            {() => <>{children}</>}
-          </Formik>
-        </Grid>
+        <Formik
+          innerRef={innerRef}
+          initialValues={initialValues}
+          onSubmit={onSubmit}
+          validationSchema={validationSchema}
+        >
+          {() => <>{children}</>}
+        </Formik>
       </Box>
     </LocalizationProvider>
   );

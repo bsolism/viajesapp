@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import Routing from "./Routes/routing";
-import RoutingAuth from "./Routes/routingAuth";
 import { ToastContainer } from "react-toastify";
-import AuthContext from "./Utils/AuthContext";
+import AuthContext from "./Auth/Context";
 import AuthScreem from "./Pages/AuthScreen";
 
 function App() {
@@ -10,8 +9,8 @@ function App() {
   return (
     <>
       <AuthContext.Provider value={{ user, setUser }}>
-        <Routing />
-        {/* {user ? <Routing /> : <AuthScreem />} */}
+        {/* <Routing /> */}
+        {user ? <Routing /> : <AuthScreem />}
 
         <ToastContainer
           position="top-right"

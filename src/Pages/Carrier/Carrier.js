@@ -21,7 +21,6 @@ export default function Carrier() {
     const getCarrier = async () => {
       await apiCarrier.GetCarriers().then((resp) => {
         if (resp.status === 200) {
-          console.log(resp.data);
           setData(resp.data);
         }
       });
