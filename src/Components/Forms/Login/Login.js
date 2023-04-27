@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import Avatar from "@mui/material/Avatar";
 import Box from "@mui/material/Box";
+import Grid from "@mui/material/Grid";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import AuthContext from "./../../../Auth/Context";
@@ -9,6 +10,7 @@ import AppFormik from "../Formik/AppFormik";
 import { toast } from "react-toastify";
 import FieldText from "../Fields/FieldText";
 import FieldSubmit from "../Fields/FieldSubmit";
+import Link from "@mui/material/Link";
 import * as Yup from "yup";
 
 const validation = Yup.object().shape({
@@ -16,7 +18,7 @@ const validation = Yup.object().shape({
   password: Yup.string().required("Password Required").min(1).label("Password"),
 });
 
-export default function Login() {
+export default function Login({ setShowForm }) {
   const { setUser } = useContext(AuthContext);
 
   const handleSubmit = async (values) => {
@@ -58,6 +60,15 @@ export default function Login() {
               type="password"
             />
             <FieldSubmit title="Login" />
+            <Grid item>
+              <Link
+                component="button"
+                variant="body2"
+                onClick={() => setShowForm(2)}
+              >
+                {"Don't have an account? Sign Up"}
+              </Link>
+            </Grid>
           </Box>
         </AppFormik>
       </Box>
