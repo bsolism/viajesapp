@@ -18,7 +18,7 @@ export default function FieldDatePicker({ name, label, value }) {
               label={label}
               inputFormat="yyyy-MM-dd"
               onChange={handleChange}
-              renderInput={(params) => (
+              TextFieldComponent={(params) => (
                 <TextField
                   fullWidth
                   {...params}

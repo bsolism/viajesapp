@@ -3,9 +3,7 @@ import axios from "axios";
 import { endPoint } from "./endPoint";
 
 const CreateEnrollEmployee = (value) => {
-  console.log(value);
   const url = `${API_HOST}${endPoint.createenrollemployee}`;
-  console.log(url);
   return axios
     .post(url, value)
     .then((response) => {

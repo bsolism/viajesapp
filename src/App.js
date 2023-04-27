@@ -6,6 +6,7 @@ import AuthScreem from "./Pages/AuthScreen";
 
 function App() {
   const [user, setUser] = useState();
+
   return (
     <>
       <AuthContext.Provider value={{ user, setUser }}>

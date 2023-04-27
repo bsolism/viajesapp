@@ -17,11 +17,11 @@ const validation = Yup.object().shape({
 });
 
 export default function Login() {
-  const { user, setUser } = useContext(AuthContext);
+  const { setUser } = useContext(AuthContext);
 
   const handleSubmit = async (values) => {
     await apiLogin.CreateLogin(values).then((res) => {
-      if (res.status == 200) {
+      if (res.status === 200) {
         setUser(res.data);
       } else {
         toast.warning("Usuario no valido");
